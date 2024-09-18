@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .navbar {
+    width: 104px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #1B093C;
+    color: white;
+  }
+  
+  .logo {
+    width: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .menu {
+    margin-top: 20px; /* Separation between logo and menu */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bottomMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto; /* Pushes the bottom menu to the bottom */
+    margin-bottom: 20px; /* Margin at the bottom */
+  }
+  
+  .icon {
+    width: 30px;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 20px;
+    background-color: #FFF;
+    min-height: 100vh;
+    background-image: url('/bgAura.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+  }
