@@ -13,11 +13,12 @@
   margin-bottom: 20px;
   padding: 0;
   line-height: 36px;
+  margin-top: 20px;
 }
 
 .subHeader {
   font-size: 24px;
-  /* margin-bottom: 10px; */
+  margin-bottom: 10px;
   line-height: 28px;
 }
 
@@ -25,13 +26,13 @@
   font-size: 16px;
   margin-bottom: 20px;
   line-height: 16px;
-  margin-top: -10px;
 }
 
 .boxContainer {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .box {
@@ -46,6 +47,7 @@
   overflow: hidden;
   color: #3e4551;
   margin-left: 25px;
+  text-decoration: none;
 }
 .box:first-child {
   margin-left: 0;
@@ -147,4 +149,31 @@
 }
 .infoImage {
   margin-left: 25px;
+}
+
+.checkListContainer {
+  display: flex;
+  flex-direction: column;
+}
+.itemCheckList {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+
+.itemCheckList > img {
+  margin-right: 10px;
+}
+
+.buttonLetsStart {
+  background-color: #fff;
+  color: #3e4551;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 22px;
+  margin-top: 20px;
+  border: 1px solid #3e4551;
+  width: 150px;
 }
