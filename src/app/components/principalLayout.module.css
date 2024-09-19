@@ -50,3 +50,6 @@
   background-size: 100% 45%;
   background-position: top center;
 }
+.simpleMain {
+  flex: 1;
+}

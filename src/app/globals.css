@@ -25,3 +25,9 @@ body {
 .input-radius {
   border-radius: 5px;
 }
+.color-dark-blue {
+  color: #101723;
+}
+.light-purple-bg {
+  background-color: #f9f5fd;
+}

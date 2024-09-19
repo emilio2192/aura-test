@@ -1,24 +1,29 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import styles from './login.module.css';
+import users from '../users.json';
 
+type User = {
+  email: string;
+  password: string; 
+  id: number;
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [canContinue, setCanContinue] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Invalid user');
-    } else {
-      setError('');
-      setCanContinue(true);
-      // Handle login logic here
+    const user = users.find((user:User) => user.email === email && user.password === password);
+    if(user) {
+      console.log('User found', user);
     }
+    setLoginError('Invalid credentials');
   };
 
   const handleUsernameChange = () => {
@@ -31,6 +36,12 @@ export default function LoginPage() {
       setCanContinue(true);
     }
   }
+
+  useEffect(() => {
+    if(email.length > 5 && password.length > 3) {
+      setCanContinue(true);
+    }
+  },[email, password])
 
 
   return (
@@ -70,6 +81,7 @@ export default function LoginPage() {
             className={styles.input}
           />
         </div>
+        {error && <span className={styles.error}>{loginError}</span>}
         <button disabled={!canContinue} type="submit" className={styles.button}>Continue</button>
       </form>
     </div>
