@@ -1,10 +1,10 @@
 import React from 'react';
-import { classNames } from '../utils/functions';
+import { classNames } from '../../utils/functions';
 
-import SimpleLayout from '../components/SimpleLayout';
+
 
 export default function AiPage() {
-    return (<SimpleLayout>
+    return (<>
         <div className={classNames('w-full h-full bg-white flex flex-col px-5 relative')}>
             <div className={classNames('flex items-center justify-between p-4 bg-white')}>
                 <a href="/home" className={classNames('color-dark-blue flex flex-row')}>
@@ -29,5 +29,5 @@ export default function AiPage() {
                     />
                 </div>
         </div>
-    </SimpleLayout>)
+    </>)
 }

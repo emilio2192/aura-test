@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+'use client'
 // import localFont from "next/font/local";
 import "./globals.css";
+import { Provider } from "react-redux";
+import store, { persistor } from '../store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
-
-export const metadata: Metadata = {
-  title: "Aura App",
-  description: "Aura",
-};
 
 export default function RootLayout({
   children,
@@ -16,8 +14,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>AURA</title>
+      </head>
       <body >
-        {children}
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            {children}
+          </PersistGate>
+        </Provider>
       </body>
     </html>
   );

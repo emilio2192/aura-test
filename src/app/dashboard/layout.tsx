@@ -2,11 +2,11 @@ import '../globals.css';
 import styles from './principalLayout.module.css';
 import React, { ReactNode } from 'react';
 
-export default function PrincipalLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className={styles.container}>
       <nav className={styles.navbar}>
-        <a href="/home">
+        <a href="/dashboard/home">
           <img src="/logo-white-compact.svg" alt="Logo" className={styles.logo} />
         </a>
         <div className={styles.menu}>

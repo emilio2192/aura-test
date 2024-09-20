@@ -1,11 +1,10 @@
 import React from "react";
-import LoggedLayout from "../components/PrincipalLayout";
-import { classNames } from "../utils/functions";
+import { classNames } from "../../utils/functions";
 import styles from './upload.module.css';
 
 export default function UploadDataPage() {
   return (
-    <LoggedLayout>
+    <>
       <h1 className={classNames('text-white text-2xl font-bold text-center mt-5')}>
         AURA
       </h1>
@@ -93,6 +92,6 @@ export default function UploadDataPage() {
           </div>
         </div>
       </div>
-    </LoggedLayout>
+    </>
   );
 }

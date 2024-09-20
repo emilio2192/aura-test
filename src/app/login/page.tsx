@@ -3,6 +3,10 @@
 import { useState, FormEvent, useEffect } from 'react';
 import styles from './login.module.css';
 import users from '../users.json';
+import { setUser } from '@/store/slices/userSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { useRouter } from 'next/navigation';
 
 type User = {
   email: string;
@@ -11,6 +15,8 @@ type User = {
 }
 
 export default function LoginPage() {
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,7 +27,9 @@ export default function LoginPage() {
     e.preventDefault();
     const user = users.find((user:User) => user.email === email && user.password === password);
     if(user) {
-      console.log('User found', user);
+      dispatch(setUser({ email: user.email, id: user.id, name: user.name }));
+      document.cookie = `email=${user.email}; path=/`;
+      router.push('/dashboard/home');
     }
     setLoginError('Invalid credentials');
   };

@@ -1,8 +1,7 @@
-import '../globals.css'
-import styles from './principalLayout.module.css';
+import styles from '../principalLayout.module.css';
 import React, { ReactNode } from 'react';
 
-export default function SimpleLayout({ children }: { children: ReactNode }) {
+export default function AiLayout({ children }: { children: ReactNode }) {
     return (
         <div className={styles.container}>
           <nav className={styles.navbar}>
