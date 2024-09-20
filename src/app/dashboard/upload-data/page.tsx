@@ -15,7 +15,7 @@ export default function UploadDataPage() {
         <div className={classNames('bg-white w-4/5 md:w-3/5 p-5 flex flex-col items-center shadow')}>
           <div className={classNames('flex flex-row w-full justify-between')}>
             <div className="text-xl">New Data</div>
-            <a href="/home">
+            <a href="/dashboard/home">
               <img src="/close.svg" alt="Close" className={classNames('w-6 h-6')} />
             </a>
           </div>

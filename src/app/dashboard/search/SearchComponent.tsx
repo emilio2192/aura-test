@@ -1,8 +1,9 @@
-'use client'
+'use client';
 import React, {useEffect, useState} from 'react';
 import styles from '../home/home.module.css';
 import CompanySelectedComponent from './CompanySelectedComponent';
-
+import { classNames } from '../../utils/functions';
+import ListResultComponent from './ListResultComponent';
 const API_COMPANY_URL = `https://financialmodelingprep.com/api/v3/search?apikey=${process.env.NEXT_PUBLIC_API_KEY}&limit=10&query=`;
 const API_TICKER_URL = `https://financialmodelingprep.com/api/v3/search-ticker?apikey=${process.env.NEXT_PUBLIC_API_KEY}&limit=10&query=`;
 
@@ -10,8 +11,11 @@ export default function SearchComponent() {
     const [search, setSearch] = useState('');
     const [data, setData] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [inputFocus, setInputFocus] = useState<boolean>(false);
+    const [companiesSelected, setCompaniesSelected] = useState<string[]>([]);
     const fetchSearch = async () => {
       try {
+
         const companyResponse = await fetch(`${API_COMPANY_URL}${search}`);
         const tickerResponse = await fetch(`${API_TICKER_URL}${search}`);
   
@@ -27,6 +31,7 @@ export default function SearchComponent() {
         }
   
         setData([...companyData, ...tickerData]);
+        
       } catch (err) {
         console.error(err);
         setError((err as Error).message);
@@ -35,23 +40,12 @@ export default function SearchComponent() {
     useEffect(() => {
       if(search.length > 0) fetchSearch();
     },[search]);
-    /**
-     * currency
-      : 
-      "USD"
-      exchangeShortName
-      : 
-      "NYSE"
-      name
-      : 
-      "Agilent Technologies, Inc."
-      stockExchange
-      : 
-      "New York Stock Exchange"
-      symbol
-      : 
-      "A"
-     */
+
+    const handleSelectCompany = (symbolSelected:string) => {
+      const arrSet = new Set(companiesSelected);
+      arrSet.add(symbolSelected);
+      setCompaniesSelected(Array.from(arrSet));
+    }
     
     return (<div className={styles.actionContainer} key="action">
         <div className={styles.action}>
@@ -62,12 +56,18 @@ export default function SearchComponent() {
             Find the company you are interested in.<br />
             This will help us customize your experience.
           </span>
-          <input 
-            onChange={(e) => setSearch(e.target.value)}
-            type='text' 
-            className={styles.actionInput} 
-            placeholder='Search company or ticket' />
+          <div className={classNames('w-full relative')}>
+            <input 
+              onChange={(e) => setSearch(e.target.value)}
+              onFocus={() => setInputFocus(true)}
+              onBlur={() => setInputFocus(false)}
+              type='text' 
+              className={styles.actionInput} 
+              placeholder='Search company or ticket' />
+              {(data && data.length && inputFocus) && <ListResultComponent items={data} handleSelectCompany={handleSelectCompany} />}
+          </div>
           <div className={styles.itemsContainer}>
+            {/* TODO: create logic to display companies selected */}
             <div className={styles.items}>
               <CompanySelectedComponent abbr='AAPL' name='Apple' />
               <CompanySelectedComponent abbr='AMZN' name='Amazon' />

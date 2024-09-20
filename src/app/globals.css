@@ -87,3 +87,18 @@ body {
 .simpleMain {
   flex: 1;
 }
+
+.listResultContainer {
+  padding: 10px;
+  width: calc(100% - 20px);
+  border: 1px solid #a2a3a8;
+  border-radius: 5px;
+  background-color: white;
+  z-index: 99;
+  height: 20vh;
+  overflow-y: scroll;
+}
+
+.companyDropdown:hover {
+  background-color: #f9f5fd;
+}
