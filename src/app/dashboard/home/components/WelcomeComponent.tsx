@@ -1,12 +1,17 @@
+'use client';
 import React from "react";
 import styles from '../home.module.css';
 import CheckListItemComponent from "./CheckListItemComponent";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
-const WelcomeComponent = () => (
-    <div className={styles.actionContainer} key="action">
+const WelcomeComponent = () => {
+    const name = useSelector((state: RootState) => state.user.name);
+
+    return (<div className={styles.actionContainer} key="action">
         <div className={styles.action}>
             <div className={styles.actionHeader}>
-                Welcome John!
+                Welcome {name}!
             </div>
             <span className={styles.descriptionAction}>
                 We are so glad to have in Aura.
@@ -33,5 +38,6 @@ const WelcomeComponent = () => (
         </div>
     </div>
 )
+}
 
 export default WelcomeComponent;
