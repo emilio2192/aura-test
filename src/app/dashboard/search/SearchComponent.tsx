@@ -6,10 +6,16 @@ import { classNames } from '../../utils/functions';
 import ListResultComponent from './ListResultComponent';
 const API_COMPANY_URL = `https://financialmodelingprep.com/api/v3/search?apikey=${process.env.NEXT_PUBLIC_API_KEY}&limit=10&query=`;
 const API_TICKER_URL = `https://financialmodelingprep.com/api/v3/search-ticker?apikey=${process.env.NEXT_PUBLIC_API_KEY}&limit=10&query=`;
-
+type ItemResponse = {
+  symbol: string;
+  name: string;
+  currency: string;
+  stockExchange: string;
+  exchangeShortName: string;
+}
 export default function SearchComponent() {
     const [search, setSearch] = useState('');
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<ItemResponse[]>([]);
     const [inputFocus, setInputFocus] = useState<boolean>(false);
     const [companiesSelected, setCompaniesSelected] = useState<string[]>([]);
     const fetchSearch = async () => {
