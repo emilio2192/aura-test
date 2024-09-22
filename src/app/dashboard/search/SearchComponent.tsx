@@ -10,7 +10,6 @@ const API_TICKER_URL = `https://financialmodelingprep.com/api/v3/search-ticker?a
 export default function SearchComponent() {
     const [search, setSearch] = useState('');
     const [data, setData] = useState<any[]>([]);
-    const [error, setError] = useState<string | null>(null);
     const [inputFocus, setInputFocus] = useState<boolean>(false);
     const [companiesSelected, setCompaniesSelected] = useState<string[]>([]);
     const fetchSearch = async () => {
@@ -34,7 +33,6 @@ export default function SearchComponent() {
         
       } catch (err) {
         console.error(err);
-        setError((err as Error).message);
       }
     }
     useEffect(() => {

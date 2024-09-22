@@ -1,11 +1,11 @@
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .navbar {
   width: 104px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
