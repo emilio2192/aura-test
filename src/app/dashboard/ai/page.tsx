@@ -24,7 +24,7 @@ export default function AiPage() {
     return (<>
         <div className={classNames('w-full h-full bg-white flex flex-col px-5 relative')}>
             <div className={classNames('flex items-center justify-between p-4 bg-white')}>
-                <a href="/home" className={classNames('color-dark-blue flex flex-row')}>
+                <a href="/dashboard/home" className={classNames('color-dark-blue flex flex-row')}>
                    <img src="/backFlag.png" alt="back" className="mr-5" /> Return
                 </a>
                 <h1 className={classNames('text-center text-2xl font-bold flex-grow')}>Aura AI</h1>

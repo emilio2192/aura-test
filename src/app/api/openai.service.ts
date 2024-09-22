@@ -28,12 +28,6 @@ export default class AIService {
      * @returns 
      */
     async consult(prompt: string) {
-        // return await this.client.completions.create({
-        //     model: 'gpt-3.5-turbo',
-        //    prompt,
-           
-        // })
-        
         return await this.client.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [

@@ -1,8 +1,43 @@
-import React from "react";
+'use client';
+import React, { useEffect, useState } from "react";
 import { classNames } from "../../utils/functions";
 import styles from './upload.module.css';
 
 export default function UploadDataPage() {
+  const [projectType, setProjectType] = useState('');
+  const [companies, setCompanies] = useState('');
+  const [experts, setExperts] = useState<string[]>([]);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const handleProjectTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setProjectType(e.target.value);
+  };
+
+  useEffect(() => {
+    const isValid = projectType !== '' && (projectType !== 'Company Research' || companies !== '') && experts.length > 0;
+    setIsFormValid(isValid);
+  }, [projectType, companies, experts]);
+  const handleExpertChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked } = e.target;
+    if (id === 'All') {
+      if (checked) {
+        setExperts(['All', 'Competitor', 'Customer', 'Industry Consultant', 'Former Executive', 'Partner']);
+      } else {
+        setExperts([]);
+      }
+    } else {
+      setExperts((prev) => {
+        if (checked) {
+          return [...prev, id];
+        } else {
+          return prev.filter((expert) => expert !== id);
+        }
+      });
+    }
+  };
+  const handleUploadData = () => {
+    console.log('uploading data..')
+  }
   return (
     <>
       <h1 className={classNames('text-white text-2xl font-bold text-center mt-5')}>
@@ -32,22 +67,29 @@ export default function UploadDataPage() {
           <div className={classNames('flex flex-col justify-start w-full mt-5')}>
             <label>Project type <span className="text-red-700">*</span></label>
             <select 
-              className={classNames('gray-color border-gray input-padding input-radius')} 
+              className={classNames('gray-color border-gray input-padding input-radius')}
+              value={projectType}
+              onChange={handleProjectTypeChange}
             >
-              <option value="1">Research</option>
-              <option value="2">Development</option>
-              <option value="3">Other</option>
+              <option value="">Select Project Type</option>
+              <option value="Company Research">Company Research</option>
+              <option value="Management Research">Management Research</option>
+              <option value="Industry Research">Industry Research</option>
             </select>
           </div>
            {/* companies */}
-           <div className={classNames('flex flex-col justify-start w-full mt-5')}>
-            <label>Companies <span className="text-red-700">*</span></label>
-            <input 
-              type='text' 
-              className={classNames('gray-color border-gray input-padding input-radius')} 
-              placeholder="E.g. Microsoft Research"
-            />
-          </div>
+           {projectType === 'Company Research' && (
+            <div className={classNames('flex flex-col justify-start w-full mt-5')}>
+              <label>Companies <span className="text-red-700">*</span></label>
+              <input 
+                type='text' 
+                className={classNames('gray-color border-gray input-padding input-radius')} 
+                placeholder="E.g. Microsoft Research"
+                value={companies}
+                onChange={(e) => setCompanies(e.target.value)}
+              />
+            </div>
+          )}
 
           {/* project description */}
           <div className={classNames('flex flex-col justify-start w-full mt-5')}>
@@ -76,11 +118,11 @@ export default function UploadDataPage() {
                   <input 
                     type="checkbox" 
                     id={value} 
-                    name="expert" 
-                    value={value} 
-                    className={classNames('mr-2')}
+                    name="expert"
+                    checked={experts.includes(value)}
+                    onChange={handleExpertChange}
                   />
-                  <label htmlFor={value}>{value}</label>
+                  <label htmlFor={value} className="ml-2">{value}</label>
                 </div>
               ))}
             </div>
@@ -88,7 +130,12 @@ export default function UploadDataPage() {
           {/* expert */}
           <div className={classNames('flex flex-row justify-eventy w-full mt-5')}>
             <button className={styles.btnCancel}>Cancel</button>
-            <button className={styles.btnUpload}>Upload</button>
+            <button 
+              className={styles.btnUpload} 
+              onClick={handleUploadData} 
+              disabled={!isFormValid}>
+                Upload
+              </button>
           </div>
         </div>
       </div>
