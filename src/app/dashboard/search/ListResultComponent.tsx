@@ -1,5 +1,7 @@
 import React from "react";
 import { classNames } from "../../utils/functions";
+import { LineWave } from "react-loader-spinner";
+import { v4 as uuid } from 'uuid'
 
 type Item = {
   symbol: string;
@@ -10,12 +12,23 @@ type Item = {
 };
 type Props = {
   items: Item[];
-  handleSelectCompany: (symbol: string) => void;
+  handleSelectCompany: (item: Item) => void;
+  isLoading: boolean;
+  handleFocusOut: () => void;
 };
-export default function ListResultComponent({ items, handleSelectCompany }: Props) {
+export default function ListResultComponent({
+  items,
+  handleSelectCompany,
+  isLoading,
+  handleFocusOut
+}: Props) {
   const itemRender = (item: Item) => (
     <div
-        onClick={() => handleSelectCompany(item.symbol)}
+      key={`option-${uuid()}`}
+      onClick={() => {
+        handleFocusOut();
+        handleSelectCompany(item)
+      }}
       className={classNames(
         "flex flex-row w-full p-1 companyDropdown cursor-pointer mb-1"
       )}
@@ -32,7 +45,21 @@ export default function ListResultComponent({ items, handleSelectCompany }: Prop
         "shadow absolute top-12 left-0 w-full p-1 flex flex-col listResultContainer"
       )}
     >
-      {items.map((item: Item) => itemRender(item))}
+      {isLoading && (
+        <LineWave
+          visible={true}
+          height="100"
+          width="100"
+          color="#6869ac"
+          ariaLabel="line-wave-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          firstLineColor=""
+          middleLineColor=""
+          lastLineColor=""
+        />
+      )}
+      {!isLoading && items.map((item: Item) => itemRender(item))}
     </div>
   );
 }
