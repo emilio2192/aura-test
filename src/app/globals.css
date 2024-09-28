@@ -102,3 +102,12 @@ body {
 .companyDropdown:hover {
   background-color: #f9f5fd;
 }
+
+.purple-color {
+  color: #6869ac;
+}
+
+.messages-container {
+  height: 79vh;
+  overflow-y: scroll;
+}
